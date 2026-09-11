@@ -1,0 +1,14 @@
+{
+  "name": "zupeex-realtime",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Companion Socket.io relay server for zupeex.in — no game logic, no database access.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "socket.io": "^4.7.5"
+  }
+}

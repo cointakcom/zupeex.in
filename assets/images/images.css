@@ -1,0 +1,164 @@
+/* images.css - full production-ready image utility stylesheet
+   Contains: avatar utilities, banner utils, nav icons, placeholders, responsive helpers.
+   Drop-in: include after main styles so these utilities can override defaults where needed.
+*/
+
+/* CSS variables (safe defaults; your main theme can override) */
+:root {
+  --img-border-radius: 12px;
+  --avatar-size-sm: 40px;
+  --avatar-size-md: 80px;
+  --avatar-size-lg: 120px;
+  --banner-height: 180px;
+  --nav-icon-size: 24px;
+  --img-placeholder-bg: #e9e9ef;
+  --img-placeholder-gradient: linear-gradient(90deg, #f3f4f6, #e9e9ef);
+}
+
+/* Generic image reset */
+img, picture, svg {
+  max-width: 100%;
+  height: auto;
+  display: inline-block;
+  vertical-align: middle;
+  border: 0;
+}
+
+/* Fallback block to ensure object-fit works; older browsers will just show scaled image */
+.img-cover, .img-fixed {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* Generic "cover" utility - fixed aspect container */
+.cover-box {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background: var(--img-placeholder-bg);
+}
+.cover-box .banner-img,
+.cover-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* Banner variants */
+.banner {
+  width: 100%;
+  height: var(--banner-height);
+  border-radius: var(--img-border-radius);
+  overflow: hidden;
+  background: var(--img-placeholder-bg);
+}
+.banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* Small banner for cards */
+.banner-sm { height: 120px; }
+.banner-md { height: 160px; }
+.banner-lg { height: 220px; }
+
+/* Avatar utilities */
+.avatar {
+  display:inline-block;
+  overflow: hidden;
+  background: var(--img-placeholder-bg);
+  text-align: center;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+.avatar img, .avatar .avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display:block;
+}
+
+/* standard avatar sizes (use .avatar.avatar-md etc.) */
+.avatar-sm { width: var(--avatar-size-sm); height: var(--avatar-size-sm); border-radius: 50%; }
+.avatar-md { width: var(--avatar-size-md); height: var(--avatar-size-md); border-radius: 50%; }
+.avatar-lg { width: var(--avatar-size-lg); height: var(--avatar-size-lg); border-radius: 12px; }
+
+/* Plain square avatar (no round) */
+.avatar-square { border-radius: var(--img-border-radius); }
+
+/* Nav icon image (used by emoji-replacer) */
+.nav-icon-img, .emoji-img {
+  width: var(--nav-icon-size);
+  height: var(--nav-icon-size);
+  object-fit: contain;
+  display:inline-block;
+  vertical-align: middle;
+}
+
+/* Responsive nav icon utilities */
+@media (min-width: 480px) {
+  :root { --nav-icon-size: 28px; }
+}
+@media (min-width: 768px) {
+  :root { --nav-icon-size: 32px; }
+}
+
+/* Placeholder (skeleton) for lazy-loaded images */
+.img-placeholder {
+  background: var(--img-placeholder-gradient);
+  background-size: 200% 100%;
+  animation: placeholderShimmer 1.6s linear infinite;
+}
+@keyframes placeholderShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Utility classes */
+.img-round { border-radius: 50%; overflow: hidden; }
+.img-rounded { border-radius: var(--img-border-radius); overflow: hidden; }
+.img-shadow { box-shadow: 0 6px 24px rgba(0,0,0,0.12); }
+
+/* Small helpers for icons inside buttons */
+.icon-inline { width: 18px; height: 18px; object-fit: contain; display:inline-block; vertical-align: middle; margin-right:6px; }
+
+/* Accessibility: images used as icons should hide from assistive tech if purely decorative */
+.icon-decorative[aria-hidden="true"] { pointer-events: none; }
+
+/* Utilities to control cropping area */
+.crop-center { object-position: center; }
+.crop-top { object-position: center top; }
+.crop-bottom { object-position: center bottom; }
+
+/* File input preview box */
+.img-preview {
+  width: 120px;
+  height: 120px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--img-placeholder-bg);
+  display: inline-block;
+}
+
+/* Small responsive utilities */
+.img-w-32 { width: 32px !important; height: 32px !important; object-fit: cover; }
+.img-w-48 { width: 48px !important; height: 48px !important; object-fit: cover; }
+.img-w-64 { width: 64px !important; height: 64px !important; object-fit: cover; }
+
+/* Ensure images inside buttons don't overflow */
+button img, .btn img { max-width: none; max-height: 100%; }
+
+/* Specific: ensure banners and avatars look crisp on high-DPI devices
+   Use HTML <img src="..." srcset="... 2x"> to provide higher-res sources.
+*/
+
+/* END of images.css */
